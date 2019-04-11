@@ -12,16 +12,17 @@
 
 #include "fdf.h"
 
-// int			handle_zoom(t_fdf *u, int dir)
-// {
-// 	clear_image(u->m_img);	
-// 	if (dir)
-// 		u->sq_size += 1;
-// 	else if (!dir && u->sq_size > 2)
-// 		u->sq_size -= 1;
-// 	// put_map_in_image(u, u->o_x, u->o_y);
-// 	return (0);
-// }
+int			handle_zoom(t_fdf *u, int dir)
+{
+	if (dir)
+		u->scale += 2;
+	else 
+		u->scale -= 2;
+	if (u->scale < 1)
+		u->scale = 1;
+	render_map(u);
+	return (0);
+}
 
 int 		handle_button_press(int key, int x, int y, t_fdf *u)
 {
@@ -36,10 +37,10 @@ int 		handle_button_press(int key, int x, int y, t_fdf *u)
 	key == BUT2_KEY ? color = MIDNIGHTBLUE: 0;
 	key == BUT3_KEY ? color = GREEN1: 0;
 	key > BUT3_KEY ? color = rand(): 0;
-	// if (key == SCROLLUP_KEY)
-	// 	handle_zoom(u, 1);
-	// else if (key == SCROLLDOWN_KEY)
-	// 	handle_zoom(u, 0);
+	if (key == SCROLLUP_KEY)
+		handle_zoom(u, 1);
+	else if (key == SCROLLDOWN_KEY)
+		handle_zoom(u, 0);
 	return (1);
 }
 
@@ -79,6 +80,9 @@ int 		handle_mouse_move(int x, int y, t_fdf *u)
 	}
 	else if (u->h_but == 3)
 	{
+		printf("ffff %d\n", (u->o_y - y));
+		printf("ffff %f\n", (u->o_y - y) / 10.0f + 0.5f);
+		printf("@@@@@@@@@@@@@@@@\n");
 		u->scale += (u->o_y - y) / 10.0f + 0.5f;
 		if (u->scale < 1)
 			u->scale = 1;

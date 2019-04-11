@@ -24,7 +24,7 @@ void        init_vector(t_vector *v, t_point *p1, t_point *p2)
 	v->err = (v->dx > v->dy ? v->dx : -v->dy) / 2;
 }
 
-void		line(t_fdf *u, t_point p1, t_point p2)
+void		trace_vec(t_fdf *u, t_point p1, t_point p2)
 {
 	t_vector	v;
 	double	percent;
@@ -85,16 +85,16 @@ void		render_map(t_fdf *u)
 		while (x < map->nb_col)
 		{
             if (x + 1 < map->nb_col)
-                    line(u, get_view_point(u, y, x), get_view_point(u, y, x + 1));
+                    trace_vec(u, get_view_point(u, y, x), get_view_point(u, y, x + 1));
             if (y + 1 < map->nb_row)
-                line(u, get_view_point(u, y, x), get_view_point(u, y + 1, x));
+                trace_vec(u, get_view_point(u, y, x), get_view_point(u, y + 1, x));
             
             if (u->cur_view == 2)
             {
                 if (y + 1 < map->nb_row && x + 1 < map->nb_col)
-                    line(u, get_view_point(u, y, x), get_view_point(u, y + 1, x + 1));
+                    trace_vec(u, get_view_point(u, y, x), get_view_point(u, y + 1, x + 1));
                 if (y + 1 < map->nb_row && x + 1 < map->nb_col)
-                    line(u, get_view_point(u, y + 1, x), get_view_point(u, y, x + 1));
+                    trace_vec(u, get_view_point(u, y + 1, x), get_view_point(u, y, x + 1));
             }
             else if (u->cur_view == 3)
             {
@@ -108,25 +108,25 @@ void		render_map(t_fdf *u)
                     ttt2 = get_view_point(u, y, x + 1);
                     while(ttt2.y < ttt.y)
                     {
-                        line(u, get_view_point(u, y, x), ttt2);
+                        trace_vec(u, get_view_point(u, y, x), ttt2);
                         ttt2.y += 1;
                     }
                     ttt3 = get_view_point(u, y, x + 1);
                     while(ttt3.x < ttt.x)
                     {
-                        line(u, get_view_point(u, y, x), ttt3);
+                        trace_vec(u, get_view_point(u, y, x), ttt3);
                         ttt3.x += 1;
                     }
                     ttt2 = get_view_point(u, y + 1, x);
                     while(ttt2.y < ttt.y)
                     {
-                        line(u, get_view_point(u, y, x), ttt2);
+                        trace_vec(u, get_view_point(u, y, x), ttt2);
                         ttt2.y += 1;
                     }
                     ttt3 = get_view_point(u, y + 1, x);
                     while(ttt3.x < ttt.x)
                     {
-                        line(u, get_view_point(u, y, x), ttt3);
+                        trace_vec(u, get_view_point(u, y, x), ttt3);
                         ttt3.x += 1;
                     }
                 }                

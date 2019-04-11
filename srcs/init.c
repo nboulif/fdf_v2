@@ -65,7 +65,7 @@ int     init_fdf(t_fdf	*u)
 	u->rot_speed = 200.0f;
 
 	u->scale = 32;
-	u->depth = 1;
+	u->depth = 0.5;
 	u->x = 0.5;
 	u->y = 0.5;
 	u->offsetx = FRAME_MAP_SIZE / 2;
