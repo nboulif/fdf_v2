@@ -64,6 +64,7 @@ typedef struct		s_fdf
 
 	// VIEW
 	int				cur_view;
+	double			rot_speed;
 
 	int				scale;
 	double			depth;

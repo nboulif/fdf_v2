@@ -66,16 +66,16 @@ int 		handle_mouse_move(int x, int y, t_fdf *u)
 	u->o_y = u->t_y;
 	u->t_x = x;
 	u->t_y = y;
-	if (u->h_but == 2)
+	if (u->h_but == 1)
+	{
+		u->x += (u->o_y - y) / u->rot_speed;
+		u->y -= (u->o_x - x) / u->rot_speed;
+
+	}
+	else if (u->h_but == 2)
 	{
 		u->offsetx += (x - u->o_x);
 		u->offsety += (y - u->o_y);
-	}
-	else if (u->h_but == 1)
-	{
-		u->x += (u->o_y - y) / 200.0f;
-		u->y -= (u->o_x - x) / 200.0f;
-
 	}
 	else if (u->h_but == 3)
 	{

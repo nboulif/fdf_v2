@@ -35,7 +35,7 @@ int			new_image(void* mlx_ptr, t_image *img)
 {
 	if ((img->ptr = mlx_new_image(mlx_ptr, FRAME_MAP_SIZE, img->nb_row)) == NULL)
 	{
-		del_image(mlx_ptr, img);
+		// del_image(mlx_ptr, img);
 		return (0);
 	}
 	img->data = mlx_get_data_addr(img->ptr, &img->bpp, &img->sizeline,

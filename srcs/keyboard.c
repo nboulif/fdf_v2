@@ -58,6 +58,22 @@ int 		handle_key_press(int key, t_fdf *u)
 			render_map(u);
 		}
 	}
+	else if (key == T_KEY)
+	{
+		if (u->rot_speed > 20.0f)
+		{
+			u->rot_speed -= 20.0f ;
+			render_map(u);
+		}
+	}
+	else if (key == R_KEY)
+	{
+		if (u->rot_speed < 500.0f)
+		{
+			u->rot_speed += 20.0f ;
+			render_map(u);
+		}
+	}
 	else if (key == 41)
 	{
 		if (u->depth > 0.1)

@@ -62,6 +62,7 @@ int     init_fdf(t_fdf	*u)
 		return (0);
 
 	u->cur_view = 1;
+	u->rot_speed = 200.0f;
 
 	u->scale = 32;
 	u->depth = 1;

@@ -15,7 +15,7 @@
 int			main(int argc, char *argv[])
 {
 	int				fd;
-	t_fdf			u;
+	t_fdf			*u;
 
 	if (argc != 2)
 		ft_putendl("usage : ./fdf source_file\n"
@@ -27,17 +27,21 @@ int			main(int argc, char *argv[])
 			ft_putendl("error");
 			return (0);
 		}
-		u.filename = argv[1];
+		u = (t_fdf*)malloc(sizeof(t_fdf));
 
-		if ((!(init_fdf(&u))) || !parse_data(&u, fd)) 
+		u->filename = argv[1];
+
+		if ((!(init_fdf(u))) || !parse_data(u, fd)) 
 		{
 			ft_putendl("error");
 			return (0);
 		}
-		// draw_contour_frame(u, u.s_img);
-		render_map(&u);
 
-		mlx_loop(u.mlx_ptr);
+		// draw_contour_frame(u, u.s_img);
+		mlx_string_put(u->mlx_ptr, u->win_ptr, u->s_img->col0, 0, u->color_max, u->filename);
+		render_map(u);
+
+		mlx_loop(u->mlx_ptr);
 
 		close(fd);
 
