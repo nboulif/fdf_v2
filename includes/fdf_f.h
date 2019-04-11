@@ -35,5 +35,6 @@ void		        render_map(t_fdf *u);
 double	            get_perc_from_val(double val, double min, double max);
 double		        get_val_from_perc(int min, int max, double perc);
 int			        get_color_between_two(int c1, int c2, double perc);
+void		        trace_vec(t_fdf *u, t_point p1, t_point p2);
 
 #endif

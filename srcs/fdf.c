@@ -41,6 +41,17 @@ int			main(int argc, char *argv[])
 		mlx_string_put(u->mlx_ptr, u->win_ptr, u->s_img->col0, 0, u->color_max, u->filename);
 		render_map(u);
 
+		// int		fd2;
+		// char 		*line;
+		
+		// if((fd2 = open("ant.png", O_RDONLY)) < 1)
+		// {
+		// 	ft_putendl("error");
+		// 	return (0);
+		// }
+		// get_next_line(fd2, &line);
+		// printf("%s\n", line);
+
 		mlx_loop(u->mlx_ptr);
 
 		close(fd);

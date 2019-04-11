@@ -15,11 +15,12 @@
 int			handle_zoom(t_fdf *u, int dir)
 {
 	if (dir)
-		u->scale += 2;
-	else 
-		u->scale -= 2;
-	if (u->scale < 1)
-		u->scale = 1;
+	{
+		if (u->depth < 10)
+			u->depth += 0.1 ;
+	}
+	else if (u->depth > 0.1)
+			u->depth -= 0.1;
 	render_map(u);
 	return (0);
 }
