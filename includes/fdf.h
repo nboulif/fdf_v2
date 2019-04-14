@@ -27,7 +27,8 @@
 
 # include <stdio.h>
 
-# define FRAME_MAP_SIZE 700
-# define FRAME_STAT_SIZE 300
-
+# define MAP_SIZE 800
+# define STAT_SIZE 300
+# define PALETTE_SIZE 300
+# define PI 3.14159265359
 #endif

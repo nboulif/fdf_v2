@@ -26,22 +26,10 @@ void		init_map_color(t_fdf *u)
 		x = 0;
 		while (x < map->nb_col)
 		{
-			if (map->map[y][x].z < 0) 
-			{
-				map->map[y][x].color = get_color_between_two(				
-					u->color_base, u->color_min,
-					get_perc_from_val(map->map[y][x].z, 0, ft_abs(map->deep_min))
-				);
-			}
-			else if (map->map[y][x].z > 0) 
-			{
-				map->map[y][x].color = get_color_between_two(				
-					u->color_base, u->color_max,
-					get_perc_from_val(map->map[y][x].z, 0, ft_abs(map->deep_max))
-				);
-			}
-			else
-				map->map[y][x].color = u->color_base;
+			map->map[y][x].color = get_color_between_two(				
+				u->color_min, u->color_max,
+				get_perc_from_val(map->map[y][x].z, map->deep_min, map->deep_max)
+			);
 			x++;
 		}
 		y++;

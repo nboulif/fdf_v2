@@ -34,19 +34,19 @@ int 		handle_key_press(int key, t_fdf *u)
 	}
 	else if (key == K1_KEY && u->h_key == V_KEY)
 	{
-		u->cur_view = 1;
+		u->m_view = 1;
 		u->h_key = 0;
 		render_map(u);
 	}
 	else if (key == K2_KEY && u->h_key == V_KEY)
 	{
-		u->cur_view = 2;
+		u->m_view = 2;
 		u->h_key = 0;
 		render_map(u);
 	}
 	else if (key == K3_KEY && u->h_key == V_KEY)
 	{
-		u->cur_view = 3;
+		u->m_view = 3;
 		u->h_key = 0;
 		render_map(u);
 	}
@@ -57,6 +57,18 @@ int 		handle_key_press(int key, t_fdf *u)
 			u->depth += 0.1 ;
 			render_map(u);
 		}
+	}
+	else if (key == 41)
+	{
+		if (u->depth > 0.1)
+		{
+			u->depth -= 0.1;
+			render_map(u);
+		}
+	}
+	else if (key == B_KEY)
+	{
+		reinit(u, "test_maps/20-60.fdf");
 	}
 	else if (key == T_KEY)
 	{
@@ -74,17 +86,28 @@ int 		handle_key_press(int key, t_fdf *u)
 			render_map(u);
 		}
 	}
-	else if (key == 41)
+	else if (key == H_KEY)
 	{
-		if (u->depth > 0.1)
-		{
-			u->depth -= 0.1;
-			render_map(u);
-		}
+		u->scale += -10 / 10.0f + 0.5f;
+		if (u->scale < 1)
+			u->scale = 1;
+		render_map(u);
 	}
-	// else if (key == NK8_KEY)
-	// 	draw_square_in_image(u, u->m_img, 100, 400);
-	// else if (key == NK9_KEY)
-	// 	draw_square_in_image(u, u->s_img, 200, 150);
+	else if (key == J_KEY)
+	{
+		u->scale += 10 / 10.0f + 0.5f;
+		if (u->scale < 1)
+			u->scale = 1;
+		render_map(u);
+	}
+	
+	else if (key == U_KEY)
+	{
+		mlx_put_image_to_window(u->mlx_ptr, u->win_ptr, u->s_img->ptr, MAP_SIZE, 0);
+	}
+	else if (key == Y_KEY)
+	{
+    	render_stat(u);
+	}
 	return (0);
 }

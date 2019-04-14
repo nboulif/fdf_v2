@@ -23,6 +23,7 @@ typedef struct		s_image
 	int				endian;
 
 	int				col0;
+	int				row0;
 	int				nb_row;
 	int				nb_col;
 
@@ -52,18 +53,25 @@ typedef struct		s_map
 typedef struct		s_fdf
 {
 	// WINDOW
-	char			*filename;
 
 	void			*mlx_ptr;
 	void			*win_ptr;
 
-	t_image			*m_img; // map frame
-	t_image			*s_img; // stat frame
+	t_image			*m_img; // map image
+	t_image			*s_img; // stat image
+	t_image			*p_img; // pallete image
 
 	t_map			*map;
 
-	// VIEW
-	int				cur_view;
+	// STAT VIEW
+	int				s_view;
+	int				c_selected;
+	char			**lst_file;
+	int				nb_lst_file;
+
+	// MAP VIEW
+	int				m_view;
+
 	double			rot_speed;
 
 	int				scale;
@@ -93,13 +101,23 @@ typedef struct		s_fdf
 
 typedef struct		s_vector
 {
-	t_point	start;
-	t_point	end;
-	int			dx;
-	int			dy;
-	int			sx;
-	int			sy;
-	int			err;
-	int			err2;
+	t_point			start;
+	t_point			end;
+	double			dx;
+	double			dy;
+	double			sx;
+	double			sy;
+	double			err;
+	double			err2;
 }					t_vector;
+
+typedef struct		s_rectangle
+{
+	int				x;
+	int				y;
+	int				h;
+	int				w;
+	int				color;
+}					t_rectangle;
+
 #endif

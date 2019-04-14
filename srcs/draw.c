@@ -52,10 +52,11 @@ void        init_vector(t_vector *v, t_point *p1, t_point *p2)
 	v->err = (v->dx > v->dy ? v->dx : -v->dy) / 2;
 }
 
-void		trace_vec(t_fdf *u, t_point p1, t_point p2)
+void		draw_vec(t_fdf *u, t_point p1, t_point p2, t_image *img)
 {
 	t_vector	v;
-	double	percent;
+	double		percent;
+	int 		color;
 
     init_vector(&v, &p1, &p2);
 	p1.x = (int)p1.x;
@@ -66,9 +67,12 @@ void		trace_vec(t_fdf *u, t_point p1, t_point p2)
     {
         percent = (v.dx > v.dy ? get_perc_from_val(p1.x, v.start.x, v.end.x)
             : get_perc_from_val(p1.y, v.start.y, v.end.y));
-        image_set_pixel(u->m_img, (int)p1.x, (int)p1.y, get_color_between_two(p1.color,
-                p2.color, percent));
-        v.err2 = v.err;
+		color = get_color_between_two(p1.color, p2.color, percent);
+		if (img)
+			image_set_pixel(img, (int)p1.x, (int)p1.y, color);
+		else
+			mlx_pixel_put(u->mlx_ptr, u->win_ptr, (int)p1.x, (int)p1.y, color);
+		v.err2 = v.err;
         v.err2 > -v.dx ? v.err -= v.dy : 0 ;
         v.err2 > -v.dx ? p1.x += v.sx : 0 ;
         v.err2 < v.dy ? v.err += v.dx : 0 ;

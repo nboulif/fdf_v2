@@ -33,7 +33,7 @@ void		del_image(void* mlx_ptr, t_image *img)
 
 int			new_image(void* mlx_ptr, t_image *img)
 {
-	if ((img->ptr = mlx_new_image(mlx_ptr, FRAME_MAP_SIZE, img->nb_row)) == NULL)
+	if ((img->ptr = mlx_new_image(mlx_ptr, img->nb_col, img->nb_row)) == NULL)
 	{
 		// del_image(mlx_ptr, img);
 		return (0);
