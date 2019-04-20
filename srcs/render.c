@@ -211,7 +211,7 @@ void        draw_palette(t_fdf *u, int cur_row)
 			(t_point){x2, y2, 1, BLACK},
             u->p_img
 		);
-		alpha += (2 * PI) / (8 * r);
+		alpha += 0.0001;
 	}
 	mlx_put_image_to_window(u->mlx_ptr, u->win_ptr, u->p_img->ptr, MAP_SIZE + 1, cur_row + 1);
 }
