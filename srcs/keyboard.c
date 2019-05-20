@@ -3,21 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboulif <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nboulif <nboulif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 19:54:15 by nboulif           #+#    #+#             */
-/*   Updated: 2019/03/24 19:54:28 by nboulif          ###   ########.fr       */
+/*   Updated: 2019/05/20 18:51:47 by nboulif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
 
 int			handle_key_release(int key, t_fdf *u)
 {
 	(void)key;
 	u->h_key = 0;
 	return (0);
+}
+
+void		handle_key_press_2(int key, t_fdf *u)
+{
+	if (key == P_KEY && u->depth < 10)
+		u->depth += 0.1;
+	else if (key == 41 && u->depth > 0.1)
+		u->depth -= 0.1;
+	else if (key == T_KEY && u->rot_speed > 20.0f)
+		u->rot_speed -= 20.0f;
+	else if (key == R_KEY && u->rot_speed < 500.0f)
+		u->rot_speed += 20.0f;
+	else if (key == H_KEY)
+	{
+		u->scale += -10 / 10.0f + 0.5f;
+		if (u->scale < 1)
+			u->scale = 1;
+	}
+	else if (key == J_KEY)
+	{
+		u->scale += 10 / 10.0f + 0.5f;
+		if (u->scale < 1)
+			u->scale = 1;
+	}
 }
 
 int			handle_key_press(int key, t_fdf *u)
@@ -38,26 +61,8 @@ int			handle_key_press(int key, t_fdf *u)
 			u->m_view = 3;
 		u->h_key = 0;
 	}
-	else if (key == P_KEY && u->depth < 10)
-			u->depth += 0.1 ;
-	else if (key == 41 && u->depth > 0.1)
-			u->depth -= 0.1;
-	else if (key == T_KEY && u->rot_speed > 20.0f)
-			u->rot_speed -= 20.0f ;
-	else if (key == R_KEY && u->rot_speed < 500.0f)
-			u->rot_speed += 20.0f ;
-	else if (key == H_KEY)
-	{
-		u->scale += -10 / 10.0f + 0.5f;
-		if (u->scale < 1)
-			u->scale = 1;
-	}
-	else if (key == J_KEY)
-	{
-		u->scale += 10 / 10.0f + 0.5f;
-		if (u->scale < 1)
-			u->scale = 1;
-	}
+	else
+		handle_key_press_2(key, u);
 	render_map(u);
 	return (0);
 }

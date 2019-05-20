@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboulif <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nboulif <nboulif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 19:54:15 by nboulif           #+#    #+#             */
-/*   Updated: 2019/03/24 19:54:28 by nboulif          ###   ########.fr       */
+/*   Updated: 2019/05/20 18:45:09 by nboulif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void			reinit(t_fdf *u, char *str)
 {
 	int				fd;
 
-	if((fd = open(str, O_RDONLY)) < 1)
+	if ((fd = open(str, O_RDONLY)) < 1)
 	{
 		ft_putendl("errorrrrr");
 		exit(0);
 	}
-	if ((!(init_fdf(u, 1))) || !parse_data(u, fd)) 
+	if ((!(init_fdf(u, 1))) || !parse_data(u, fd))
 	{
 		ft_putendl("errorrrr");
-		exit (0);
+		exit(0);
 	}
 	close(fd);
 	render_map(u);
@@ -43,8 +43,7 @@ void			render_stat(t_fdf *u)
 	if (u->s_view == 1)
 	{
 		draw_line_sep_in_stat(u, 160, WHITE);
-		draw_name_centered(u, 170, WHITE, "Modes");
-		draw_choice_m_view(u, 200);
+		draw_choice_m_view_1(u, 200);
 		draw_name_centered(u, 330, WHITE, "Colors");
 		draw_choice_color(u, 360);
 		draw_palette(u, 410);
@@ -53,7 +52,7 @@ void			render_stat(t_fdf *u)
 	{
 		i = 0;
 		j = 100;
-		while(u->lst_file[i])
+		while (u->lst_file[i])
 		{
 			draw_name_centered(u, j, WHITE, u->lst_file[i++]);
 			j += 40;

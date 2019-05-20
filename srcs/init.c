@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboulif <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nboulif <nboulif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 01:27:56 by nboulif           #+#    #+#             */
-/*   Updated: 2019/03/25 01:27:58 by nboulif          ###   ########.fr       */
+/*   Updated: 2019/05/20 18:53:32 by nboulif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int					init_imgs(t_fdf *u)
+int				init_imgs(t_fdf *u)
 {
 	if (!(u->m_img = (t_image*)malloc(sizeof(t_image))) ||
-		!(u->p_img = (t_image*)malloc(sizeof(t_image)))
-		)
+		!(u->p_img = (t_image*)malloc(sizeof(t_image))))
 		return (0);
 	u->m_img->nb_row = MAP_SIZE;
 	u->m_img->nb_col = MAP_SIZE;
@@ -40,8 +39,7 @@ int				init_mlx(t_fdf *u, int reinit)
 			u->mlx_ptr,
 			MAP_SIZE + STAT_SIZE,
 			MAP_SIZE,
-			u->lst_file[0]
-		);
+			u->lst_file[0]);
 	}
 	if (!(init_imgs(u)))
 		return (0);
@@ -56,7 +54,7 @@ int				init_mlx(t_fdf *u, int reinit)
 	return (1);
 }
 
-int				init_fdf(t_fdf	*u, int reinit)
+int				init_fdf(t_fdf *u, int reinit)
 {
 	if (!(u->map = (t_map*)malloc(sizeof(t_map))))
 		return (0);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nboulif <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: nboulif <nboulif@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 23:59:28 by nboulif           #+#    #+#              #
-#    Updated: 2019/03/24 19:56:18 by nboulif          ###   ########.fr        #
+#    Updated: 2019/05/20 18:19:50 by nboulif          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,11 @@ HEADERS_DIRECTORY = ./includes/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY = srcs/
-SOURCES_LIST = fdf.c get_next_line.c init.c parse.c image.c mouse.c handle_mouse_move.c \
-				keyboard.c draw.c draw_choice.c draw_utils.c render.c render_stat.c render_diff_view.c handle_stat_button.c
+SOURCES_LIST = fdf.c get_next_line.c init.c parse.c image.c \
+				mouse.c handle_mouse_move.c \
+				keyboard.c draw.c draw_choice.c draw_utils.c render.c \
+				render_stat.c render_diff_view.c \
+				render_view_colored.c handle_stat_button.c
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
 OBJECTS_DIRECTORY = objs/
@@ -85,5 +88,5 @@ fclean: clean
 	@echo "$(NAME): $(RED)$(LIBFT) was deleted$(RESET)"
 	@rm -f $(NAME)
 	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
-	
+
 re: fclean all

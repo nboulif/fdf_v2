@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboulif <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nboulif <nboulif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 19:54:15 by nboulif           #+#    #+#             */
-/*   Updated: 2019/03/24 19:54:28 by nboulif          ###   ########.fr       */
+/*   Updated: 2019/05/20 17:23:24 by nboulif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ void			draw_boxed_text(t_fdf *u, char *str, int color, t_point *p)
 	rect.x = p->x;
 	rect.y = p->y;
 	rect.w = 10 * ft_strlen(str) + 20;
-	rect.h = 30 ;
+	rect.h = 30;
 	rect.color = p->color;
 	draw_rect_in_win(u, &rect);
-		
 	mlx_string_put(u->mlx_ptr, u->win_ptr, rect.x + 10, rect.y + 5,
 		color, str);
 }

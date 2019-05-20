@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_s.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboulif <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nboulif <nboulif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 03:37:14 by nboulif           #+#    #+#             */
-/*   Updated: 2019/03/25 03:37:15 by nboulif          ###   ########.fr       */
+/*   Updated: 2019/05/20 17:43:28 by nboulif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FDF_S_H
 # define FDF_S_H
@@ -76,10 +75,10 @@ typedef struct		s_fdf
 
 	int				h_but;
 	int				h_key;
-	
+
 	int				o_x;
 	int				o_y;
-	
+
 	int				t_x;
 	int				t_y;
 
@@ -87,7 +86,7 @@ typedef struct		s_fdf
 	int				color_base;
 	int				color_null;
 	int				color_min;
-	
+
 }					t_fdf;
 
 typedef struct		s_vector

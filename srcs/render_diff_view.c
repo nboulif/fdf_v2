@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_diff_view.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboulif <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nboulif <nboulif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 19:54:15 by nboulif           #+#    #+#             */
-/*   Updated: 2019/03/24 19:54:28 by nboulif          ###   ########.fr       */
+/*   Updated: 2019/05/20 18:19:07 by nboulif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void			render_map_view_point(t_fdf *u)
 {
 	int				x;
 	int				y;
+	t_point			p;
 
 	y = 0;
 	while (y < u->map->nb_row)
@@ -43,8 +44,8 @@ void			render_map_view_point(t_fdf *u)
 		x = 0;
 		while (x < u->map->nb_col)
 		{
-			t_point pooo = get_view_point(u, y, x);
-			image_set_pixel(u->m_img, pooo.x, pooo.y, u->map->map[y][x].color);
+			p = get_view_point(u, y, x);
+			image_set_pixel(u->m_img, p.x, p.y, u->map->map[y][x].color);
 			x++;
 		}
 		y++;
@@ -63,13 +64,17 @@ void			render_map_view_cross(t_fdf *u)
 		while (x < u->map->nb_col)
 		{
 			if (x + 1 < u->map->nb_col)
-				draw_vec(u, get_view_point(u, y, x), get_view_point(u, y, x + 1), u->m_img);
+				draw_vec(u, get_view_point(u, y, x),
+					get_view_point(u, y, x + 1), u->m_img);
 			if (y + 1 < u->map->nb_row)
-				draw_vec(u, get_view_point(u, y, x), get_view_point(u, y + 1, x), u->m_img);
+				draw_vec(u, get_view_point(u, y, x),
+					get_view_point(u, y + 1, x), u->m_img);
 			if (y + 1 < u->map->nb_row && x + 1 < u->map->nb_col)
-				draw_vec(u, get_view_point(u, y, x), get_view_point(u, y + 1, x + 1), u->m_img);
+				draw_vec(u, get_view_point(u, y, x),
+					get_view_point(u, y + 1, x + 1), u->m_img);
 			if (y + 1 < u->map->nb_row && x + 1 < u->map->nb_col)
-				draw_vec(u, get_view_point(u, y + 1, x), get_view_point(u, y, x + 1), u->m_img);
+				draw_vec(u, get_view_point(u, y + 1, x),
+					get_view_point(u, y, x + 1), u->m_img);
 			x++;
 		}
 		y++;
@@ -88,62 +93,11 @@ void			render_map_view_default_1(t_fdf *u)
 		while (x < u->map->nb_col)
 		{
 			if (x + 1 < u->map->nb_col)
-				draw_vec(u, get_view_point(u, y, x), get_view_point(u, y, x + 1), u->m_img);
+				draw_vec(u, get_view_point(u, y, x),
+					get_view_point(u, y, x + 1), u->m_img);
 			if (y + 1 < u->map->nb_row)
-				draw_vec(u, get_view_point(u, y, x), get_view_point(u, y + 1, x), u->m_img);
-			x++;
-		}
-		y++;
-	}
-}
-
-void			render_map_view_colored(t_fdf *u)
-{
-	int			x;
-	int			y;
-
-	y = 0;
-	while (y < u->map->nb_row)
-	{
-		x = 0;
-		while (x < u->map->nb_col)
-		{   
-			if (x + 1 < u->map->nb_col)
-				draw_vec(u, get_view_point(u, y, x), get_view_point(u, y, x + 1), u->m_img);
-			if (y + 1 < u->map->nb_row)
-				draw_vec(u, get_view_point(u, y, x), get_view_point(u, y + 1, x), u->m_img);
-		
-			if (y + 1 < u->map->nb_row && x + 1 < u->map->nb_col)
-			{
-				t_point ttt;
-				t_point ttt2;
-				t_point ttt3;
-				ttt = get_view_point(u, y + 1, x + 1);
-				ttt2 = get_view_point(u, y, x + 1);
-				while(ttt2.y < ttt.y)
-				{
-					draw_vec(u, get_view_point(u, y, x), ttt2, u->m_img);
-					ttt2.y += 1;
-				}
-				ttt3 = get_view_point(u, y, x + 1);
-				while(ttt3.x < ttt.x)
-				{
-					draw_vec(u, get_view_point(u, y, x), ttt3, u->m_img);
-					ttt3.x += 1;
-				}
-				ttt2 = get_view_point(u, y + 1, x);
-				while(ttt2.y < ttt.y)
-				{
-					draw_vec(u, get_view_point(u, y, x), ttt2, u->m_img);
-					ttt2.y += 1;
-				}
-				ttt3 = get_view_point(u, y + 1, x);
-				while(ttt3.x < ttt.x)
-				{
-					draw_vec(u, get_view_point(u, y, x), ttt3, u->m_img);
-					ttt3.x += 1;
-				}
-			} 
+				draw_vec(u, get_view_point(u, y, x),
+					get_view_point(u, y + 1, x), u->m_img);
 			x++;
 		}
 		y++;

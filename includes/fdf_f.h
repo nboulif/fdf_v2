@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_f.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboulif <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nboulif <nboulif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 03:37:23 by nboulif           #+#    #+#             */
-/*   Updated: 2019/03/25 03:37:24 by nboulif          ###   ########.fr       */
+/*   Updated: 2019/05/20 18:21:47 by nboulif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 int					init_fdf(t_fdf	*u, int reinit);
 void				reinit(t_fdf *u, char *str);
 
-int					parse_data(t_fdf  *u, int fd);
+int					parse_data(t_fdf *u, int fd);
+int					parse_map_rec(t_map *map, int fd, int count);
 void				init_map_color(t_fdf *u);
 
 void				image_set_pixel(t_image *image, int x, int y, int color);
 void				clear_image(t_image *image);
-void				del_image(void* mlx_ptr, t_image *img);
-int					new_image(void* mlx_ptr, t_image *img);
+void				del_image(void *mlx_ptr, t_image *img);
+int					new_image(void *mlx_ptr, t_image *img);
 
 int					handle_key_press(int key, t_fdf *u);
 int					handle_key_release(int key, t_fdf *u);
@@ -42,18 +43,24 @@ void				draw_vec(t_fdf *u, t_point p1, t_point p2, t_image *img);
 void				init_vector(t_vector *v, t_point *p1, t_point *p2);
 
 void				draw_palette(t_fdf *u, int cur_row);
-void				draw_fill_choice(t_fdf *u, int cur_row, int color, int choice);
+void				draw_fill_choice(t_fdf *u, int cur_row, int color,
+						int choice);
 
-void				draw_fill_choice(t_fdf *u, int cur_row, int color, int choice);
-void				draw_choice_m_view(t_fdf *u, int cur_row);
-void				draw_choice_color(t_fdf *u, int cur_row);
 void				draw_choice_s_view(t_fdf *u, int cur_row);
+void				draw_fill_choice(t_fdf *u, int cur_row, int color,
+						int choice);
+void				draw_choice_m_view_1(t_fdf *u, int cur_row);
+void				draw_choice_m_view_2(t_fdf *u, int cur_row, int cur_col);
+void				draw_choice_color(t_fdf *u, int cur_row);
 
 void				draw_boxed_text(t_fdf *u, char *str, int color, t_point *p);
-void				draw_mid_sep_in_stat(t_fdf *u, int cur_row, int color, int h);
+void				draw_mid_sep_in_stat(t_fdf *u, int cur_row, int color,
+						int h);
 void				draw_line_sep_in_stat(t_fdf *u, int cur_row, int color);
-void				draw_name_centered(t_fdf *u, int cur_row, int color, char *str);
+void				draw_name_centered(t_fdf *u, int cur_row, int color,
+						char *str);
 
+t_point				get_view_point(t_fdf *u, int y, int x);
 void				render_map(t_fdf *u);
 void				render_stat(t_fdf *u);
 
