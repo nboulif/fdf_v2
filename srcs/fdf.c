@@ -6,7 +6,7 @@
 /*   By: nboulif <nboulif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 19:54:15 by nboulif           #+#    #+#             */
-/*   Updated: 2019/05/20 18:52:58 by nboulif          ###   ########.fr       */
+/*   Updated: 2019/05/20 19:11:18 by nboulif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ int			main(int argc, char **argv)
 		if (fd < 1 || !(u = (t_fdf*)malloc(sizeof(t_fdf)))
 			|| !(open_files(u, argc, argv)) || !(init_fdf(u, 0))
 			|| !parse_data(u, fd))
+		{
+			ft_putendl("ERROR");
 			return (0);
+		}
 		close(fd);
 		render_map(u);
 		render_stat(u);
