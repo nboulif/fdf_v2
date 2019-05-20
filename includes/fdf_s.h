@@ -36,7 +36,6 @@ typedef struct		s_point
 	double			z;
 
 	int				color;
-
 }					t_point;
 
 typedef struct		s_map
@@ -47,29 +46,23 @@ typedef struct		s_map
 
 	int				deep_max;
 	int				deep_min;
-
 }					t_map;
 
 typedef struct		s_fdf
 {
-	// WINDOW
-
 	void			*mlx_ptr;
 	void			*win_ptr;
 
-	t_image			*m_img; // map image
-	t_image			*s_img; // stat image
-	t_image			*p_img; // pallete image
+	t_image			*m_img;
+	t_image			*p_img;
 
 	t_map			*map;
 
-	// STAT VIEW
 	int				s_view;
 	int				c_selected;
 	char			**lst_file;
 	int				nb_lst_file;
 
-	// MAP VIEW
 	int				m_view;
 
 	double			rot_speed;
@@ -81,9 +74,8 @@ typedef struct		s_fdf
 	double			x;
 	double			y;
 
-	// EVENT
-	int				h_but; //hang_button
-	int				h_key; //hang_key
+	int				h_but;
+	int				h_key;
 	
 	int				o_x;
 	int				o_y;
@@ -91,7 +83,6 @@ typedef struct		s_fdf
 	int				t_x;
 	int				t_y;
 
-	// COLOR
 	int				color_max;
 	int				color_base;
 	int				color_null;

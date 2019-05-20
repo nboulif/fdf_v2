@@ -26,7 +26,7 @@ void		init_map_color(t_fdf *u)
 		x = 0;
 		while (x < map->nb_col)
 		{
-			map->map[y][x].color = get_color_between_two(				
+			map->map[y][x].color = get_color_between_two(
 				u->color_min, u->color_max,
 				get_perc_from_val(map->map[y][x].z, map->deep_min, map->deep_max)
 			);
@@ -66,20 +66,20 @@ static int	 parse_row(t_map *map, char *line, int i_row)
 static int	parse_map_rec(t_map *map, int fd, int count)
 {
 	int			res;
-	char 		*line;
-	int 		i;
+	char		*line;
+	int			i;
 
 	res = get_next_line(fd, &line);
 	if (res == 1)
 	{
 		if (map->nb_col == 0)
-        {
-            i = 0;
-            while(line[i])
-                if (line[i++] == ' ' && ++map->nb_col)
-                    while (line[i] == ' ')
-                        i++;
-        }
+		{
+			i = 0;
+			while(line[i])
+				if (line[i++] == ' ' && ++map->nb_col)
+					while (line[i] == ' ')
+						i++;
+		}
 		if (parse_map_rec(map, fd, count + 1) )
 		{
 			parse_row(map, line, count);
@@ -96,7 +96,7 @@ static int	parse_map_rec(t_map *map, int fd, int count)
 	return (0);
 }
 
-int		    parse_data(t_fdf *u, int fd)
+int			parse_data(t_fdf *u, int fd)
 {
 	u->map->nb_col = 0;
 	u->map->nb_row = 0;

@@ -10,7 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-
 NAME = fdf
 
 CC = gcc
@@ -20,7 +19,6 @@ FLAGS = -Wall -Wextra -Werror -O3
 LIBRARIES = -lmlx -lm -lft -L$(LIBFT_DIRECTORY) -L$(MINILIBX_DIRECTORY) -framework OpenGL -framework AppKit
 INCLUDES = -I$(HEADERS_DIRECTORY) -I$(LIBFT_HEADERS) -I$(MINILIBX_HEADERS)
 
-
 LIBFT = $(LIBFT_DIRECTORY)libft.a
 LIBFT_DIRECTORY = libft/
 LIBFT_HEADERS = $(LIBFT_DIRECTORY)
@@ -29,22 +27,20 @@ MINILIBX = $(MINILIBX_DIRECTORY)libmlx.a
 MINILIBX_DIRECTORY = ./minilibx_macos/
 MINILIBX_HEADERS = $(MINILIBX_DIRECTORY)
 
-
 DIR_O = obj
 
-# HEADERS_LIST = fdf_s.h fdf_f.h fdf.h custom.h
 HEADERS_LIST = fdf.h
 HEADERS_DIRECTORY = ./includes/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY = srcs/
-SOURCES_LIST = fdf.c get_next_line.c init.c parse.c image.c mouse.c keyboard.c draw.c render.c
+SOURCES_LIST = fdf.c get_next_line.c init.c parse.c image.c mouse.c handle_mouse_move.c \
+				keyboard.c draw.c draw_choice.c draw_utils.c render.c render_stat.c render_diff_view.c handle_stat_button.c
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
 OBJECTS_DIRECTORY = objs/
 OBJECTS_LIST = $(patsubst %.c, %.o, $(SOURCES_LIST))
 OBJECTS	= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
-# COLORS
 
 GREEN = \033[0;32m
 RED = \033[0;31m
