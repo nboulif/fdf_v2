@@ -6,7 +6,7 @@
 /*   By: nboulif <nboulif@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 19:54:15 by nboulif           #+#    #+#             */
-/*   Updated: 2019/05/20 18:45:09 by nboulif          ###   ########.fr       */
+/*   Updated: 2019/05/20 19:15:27 by nboulif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void			reinit(t_fdf *u, char *str)
 
 	if ((fd = open(str, O_RDONLY)) < 1)
 	{
-		ft_putendl("errorrrrr");
+		ft_putendl("ERROR");
 		exit(0);
 	}
 	if ((!(init_fdf(u, 1))) || !parse_data(u, fd))
 	{
-		ft_putendl("errorrrr");
+		ft_putendl("ERROR");
 		exit(0);
 	}
 	close(fd);
