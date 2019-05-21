@@ -66,6 +66,24 @@ void			draw_palette(t_fdf *u, int cur_row)
 		u->p_img->ptr, MAP_SIZE + 1, cur_row + 1);
 }
 
+void			fill_rect_in_win(t_fdf *u)
+{
+	int				x;
+	int				y;
+
+	y = 0;
+	while (y < MAP_SIZE)
+	{
+		x = 0;
+		while (x < STAT_SIZE)
+		{
+			mlx_pixel_put(u->mlx_ptr, u->win_ptr,
+				MAP_SIZE + x++, y, BLACK);
+		}
+		y++;
+	}
+}
+
 void			draw_rect_in_win(t_fdf *u, t_rectangle *rect)
 {
 	int				x;
@@ -98,5 +116,6 @@ void			draw_countour_stat(t_fdf *u)
 	rect.w = STAT_SIZE - 1;
 	rect.h = MAP_SIZE - 1;
 	rect.color = WHITE;
+	fill_rect_in_win(u);
 	draw_rect_in_win(u, &rect);
 }
