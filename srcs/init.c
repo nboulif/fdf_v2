@@ -12,6 +12,29 @@
 
 #include "fdf.h"
 
+void			init_map_color(t_fdf *u)
+{
+	int			x;
+	int			y;
+	t_map		*map;
+
+	map = u->map;
+	y = 0;
+	while (y < map->nb_row)
+	{
+		x = 0;
+		while (x < map->nb_col)
+		{
+			map->map[y][x].color = get_color_between_two(
+				u->color_min, u->color_max,
+				get_perc_from_val(map->map[y][x].z,
+				map->deep_min, map->deep_max));
+			x++;
+		}
+		y++;
+	}
+}
+
 int				init_imgs(t_fdf *u)
 {
 	if (!(u->m_img = (t_image*)malloc(sizeof(t_image))) ||
@@ -27,13 +50,18 @@ int				init_imgs(t_fdf *u)
 	u->s_img->nb_col = STAT_SIZE;
 	u->s_img->row0 = 0;
 	u->s_img->col0 = MAP_SIZE;
-    new_image(u->mlx_ptr, u->s_img);
+	new_image(u->mlx_ptr, u->s_img);
 	u->p_img->nb_row = PALETTE_SIZE - 4;
 	u->p_img->nb_col = STAT_SIZE - 4;
 	u->p_img->row0 = MAP_SIZE - PALETTE_SIZE - 2;
 	u->p_img->col0 = MAP_SIZE + 2;
 	new_image(u->mlx_ptr, u->p_img);
 	return (1);
+}
+
+int				handle_exit(int nb)
+{
+	exit(nb);
 }
 
 int				init_mlx(t_fdf *u, int reinit)
@@ -56,6 +84,7 @@ int				init_mlx(t_fdf *u, int reinit)
 		mlx_hook(u->win_ptr, BUTTONPRESS, 0, &handle_button_press, u);
 		mlx_hook(u->win_ptr, BUTTONRELEASE, 0, &handle_button_release, u);
 		mlx_hook(u->win_ptr, MOTIONNOTIFY, 0, &handle_mouse_move, u);
+		mlx_hook(u->win_ptr, DESTROYNOTIFY, 0, &handle_exit, 0);
 	}
 	return (1);
 }

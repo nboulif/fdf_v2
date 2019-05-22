@@ -12,27 +12,32 @@
 
 #include "fdf.h"
 
-void		init_map_color(t_fdf *u)
+int			parse_row_check(t_map *map, char **lst, int i_row, int i)
 {
-	int			x;
-	int			y;
-	t_map		*map;
+	int j;
 
-	map = u->map;
-	y = 0;
-	while (y < map->nb_row)
+	j = 0;
+	if (!(ft_isdigit(lst[i][j]) || lst[i][j] == '-'))
 	{
-		x = 0;
-		while (x < map->nb_col)
-		{
-			map->map[y][x].color = get_color_between_two(
-				u->color_min, u->color_max,
-				get_perc_from_val(map->map[y][x].z,
-				map->deep_min, map->deep_max));
-			x++;
-		}
-		y++;
+		ft_strdel(&(lst[i]));
+		return (0);
 	}
+	while (lst[i][++j])
+	{
+		if (!ft_isdigit(lst[i][j]))
+		{
+			ft_strdel(&(lst[i]));
+			return (0);
+		}
+	}
+	map->map[i_row][i] = (t_point){(double)i, (double)i_row,
+		(double)ft_atoi(lst[i]), 0xFFFFFF};
+	ft_strdel(&(lst[i]));
+	map->deep_max < map->map[i_row][i].z ?
+		map->deep_max = map->map[i_row][i].z : 0;
+	map->deep_min > map->map[i_row][i].z ?
+		map->deep_min = map->map[i_row][i].z : 0;
+	return (1);
 }
 
 int			parse_row(t_map *map, char *line, int i_row)
@@ -45,15 +50,8 @@ int			parse_row(t_map *map, char *line, int i_row)
 		return (0);
 	i = -1;
 	while (lst && lst[++i] && i < map->nb_col)
-	{
-		map->map[i_row][i] = (t_point){(double)i, (double)i_row,
-			(double)ft_atoi(lst[i]), 0xFFFFFF};
-		ft_strdel(&(lst[i]));
-		map->deep_max < map->map[i_row][i].z ?
-			map->deep_max = map->map[i_row][i].z : 0;
-		map->deep_min > map->map[i_row][i].z ?
-			map->deep_min = map->map[i_row][i].z : 0;
-	}
+		if (!parse_row_check(map, lst, i_row, i))
+			return (0);
 	if (lst)
 		free(lst);
 	if (i != map->nb_col)
@@ -64,27 +62,24 @@ int			parse_row(t_map *map, char *line, int i_row)
 	return (1);
 }
 
-int			parse_map_line(t_map *map, int fd, int count, char *line)
+int			parse_map_line(t_map *map, char *line)
 {
 	int			i;
+	int			o;
 
+	o = 0;
+	i = 0;
+	while (line[i])
+		if (line[i++] == ' ' && ++o)
+			while (line[i] == ' ')
+				i++;
+	if (!o)
+		return (0);
 	if (map->nb_col == 0)
-	{
-		i = 0;
-		while (line[i])
-			if (line[i++] == ' ' && ++map->nb_col)
-				while (line[i] == ' ')
-					i++;
-	}
-	if (parse_map_rec(map, fd, count + 1))
-	{
-		if (!parse_row(map, line, count))
-			return (-1);
-		ft_strdel(&line);
-		if (map->map[count])
-			return (1);
-	}
-	return (0);
+		map->nb_col = o;
+	else if (map->nb_col != o)
+		return (0);
+	return (1);
 }
 
 int			parse_map_rec(t_map *map, int fd, int count)
@@ -94,14 +89,25 @@ int			parse_map_rec(t_map *map, int fd, int count)
 
 	res = get_next_line(fd, &line);
 	if (res == 1)
-		return (parse_map_line(map, fd, count, line));
-	else
 	{
-		if (!(map->map = (t_point**)malloc(sizeof(t_point*) * count)))
-			return (-1);
+		if (parse_map_line(map, line) && parse_map_rec(map, fd, count + 1))
+		{
+			res = parse_row(map, line, count);
+			ft_strdel(&line);
+			if (!res)
+				return (0);
+			if (map->map[count])
+				return (1);
+		}
+	}
+	else if (res == 0)
+	{
+		if (!count || !(map->map = (t_point**)malloc(sizeof(t_point*) * count)))
+			return (0);
 		map->nb_row = count;
 		return (1);
 	}
+	return (0);
 }
 
 int			parse_data(t_fdf *u, int fd)
@@ -110,7 +116,7 @@ int			parse_data(t_fdf *u, int fd)
 	u->map->nb_row = 0;
 	u->map->deep_max = 0;
 	u->map->deep_min = 0;
-	if ((parse_map_rec(u->map, fd, 0)) < 0)
+	if (!(parse_map_rec(u->map, fd, 0)))
 		return (0);
 	init_map_color(u);
 	return (1);

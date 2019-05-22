@@ -13,12 +13,12 @@
 #ifndef FDF_F_H
 # define FDF_F_H
 
+void				init_map_color(t_fdf *u);
 int					init_fdf(t_fdf	*u, int reinit);
 void				reinit(t_fdf *u, char *str);
 
 int					parse_data(t_fdf *u, int fd);
 int					parse_map_rec(t_map *map, int fd, int count);
-void				init_map_color(t_fdf *u);
 
 void				image_set_pixel(t_image *image, int x, int y, int color);
 void				clear_image(t_image *image);
