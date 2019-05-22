@@ -88,7 +88,7 @@ int			handle_button_press(int key, int x, int y, t_fdf *u)
 		else if (key == SCROLLDOWN_KEY)
 			handle_zoom(u, 0);
 	}
-	else
+	else if (key == 1)
 		handle_stat_button(x, y, u);
 	return (1);
 }

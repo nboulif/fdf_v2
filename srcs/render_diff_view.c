@@ -23,16 +23,11 @@ t_point			get_view_point(t_fdf *u, int y, int x)
 	p.z *= u->depth;
 	p.z -= (double)(u->map->deep_min + u->map->deep_max) / 2.0f;
 	p_tmp = p;
-	if (u->m_view == 2)
-	{
-		p_tmp.x = p_tmp.x + 0.5 * p.z;
-		p_tmp.y = p_tmp.y + (0.5 / 2.0f) * p.z;
-	}
-	else if (u->m_view == 6)
-	{
-		p_tmp.x = (0.5 * p.x - 0.5 * p.y);
-		p_tmp.y = (-p.z + (0.5 / 2.0f) * p.x + (0.5 / 2.0f) * p.y);
-	}
+	u->m_view == 2 ? p_tmp.x = p_tmp.x + 0.5 * p.z : 0;
+	u->m_view == 2 ? p_tmp.y = p_tmp.y + (0.5 / 2.0f) * p.z : 0;
+	u->m_view == 6 ? p_tmp.x = (0.5 * p.x - 0.5 * p.y) : 0;
+	u->m_view == 6 ? p_tmp.y =
+		(-p.z + (0.5 / 2.0f) * p.x + (0.5 / 2.0f) * p.y) : 0;
 	p.x = cos(u->y) * p_tmp.x + sin(u->y) * p.z;
 	p.z = -sin(u->y) * p_tmp.x + cos(u->y) * p.z;
 	p.y = cos(u->x) * p_tmp.y - sin(u->x) * p.z;
