@@ -11,45 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-// t_point        rasterise_iso(t_fdf *fdf, t_point p, int z)
-// {
-//     double cte1;
-//     double cte2;
-
-//     cte1 = 0.5;
-//     cte2 = 0.5;
-//     fdf->zoom = fdf->zoom < 0 ? 0 : fdf->zoom;
-//     p.x = fdf->xoffset + (p.x * fdf->zoom);
-//     p.y = fdf->yoffset + (p.y * fdf->zoom);
-//     z = z * fdf->altitude;
-//     if (z > 0)
-//         p.color = fdf->color2;
-//     else
-//         p.color = fdf->color1;
-//     p.x = fdf->xoffset + (cte1 * p.x - cte2 * p.y);
-//     p.y = fdf->yoffset + (-z + (cte1 / 2.0) * p.x + (cte2 / 2.0) * p.y);
-//     p.border = 0;
-//     return (p);
-// }
-
-// t_point        rasterise_par(t_fdf *fdf, t_point p, int z)
-// {
-//     double cte;
-
-//     cte = 0.5;
-//     fdf->zoom = fdf->zoom < 0 ? 0 : fdf->zoom;
-//     p.x = fdf->xoffset + (p.x * fdf->zoom);
-//     p.y = fdf->yoffset + (p.y * fdf->zoom);
-//     z = z * fdf->altitude;
-//     if (z > 0)
-//         p.color = fdf->color2;
-//     else
-//         p.color = fdf->color1;
-//     p.x = p.x + cte * z;
-//     p.y = p.y + (cte / 2.0) * z;
-//     p.border = 0;
-//     return (p);
-// }
 
 t_point			get_view_point(t_fdf *u, int y, int x)
 {
@@ -61,26 +22,23 @@ t_point			get_view_point(t_fdf *u, int y, int x)
 	p.y -= (double)(u->map->nb_row - 1) / 2.0f;
 	p.z *= u->depth;
 	p.z -= (double)(u->map->deep_min + u->map->deep_max) / 2.0f;
-
-
-
 	p_tmp = p;
-
-	// p.x = cos(u->y) * p_tmp.x + sin(u->y) * p.z;
-	// p.z = -sin(u->y) * p_tmp.x + cos(u->y) * p.z;
-	// p.y = cos(u->x) * p_tmp.y - sin(u->x) * p.z;
-	// p.z = sin(u->x) * p_tmp.y + cos(u->x) * p.z;
-
-
+	if (u->m_view == 2)
+	{
+		p_tmp.x = p_tmp.x + 0.5 * p.z;
+		p_tmp.y = p_tmp.y + (0.5 / 2.0f) * p.z;
+	}
+	else if (u->m_view == 6)
+	{
+		p_tmp.x = (0.5 * p.x - 0.5 * p.y);
+		p_tmp.y = (-p.z + (0.5 / 2.0f) * p.x + (0.5 / 2.0f) * p.y);
+	}
+	p.x = cos(u->y) * p_tmp.x + sin(u->y) * p.z;
+	p.z = -sin(u->y) * p_tmp.x + cos(u->y) * p.z;
+	p.y = cos(u->x) * p_tmp.y - sin(u->x) * p.z;
+	p.z = sin(u->x) * p_tmp.y + cos(u->x) * p.z;
 	p.x = (p.x * u->scale) + u->offsetx;
 	p.y = (p.y * u->scale) + u->offsety;
-
-	// p.x = p.x + 0.5 * p.z;
-	// p.y = p.y + (0.5 / 2.0f) * p.z;
-
-    p.x = (0.5 * p.x - 0.5 * p.y);
-    p.y = (-p.z + (0.5 / 2.0) * p.x + (0.5 / 2.0) * p.y);
-
 	return (p);
 }
 
@@ -133,7 +91,7 @@ void			render_map_view_cross(t_fdf *u)
 	}
 }
 
-void			render_map_view_default_1(t_fdf *u)
+void			render_map_view_default(t_fdf *u)
 {
 	int				x;
 	int				y;

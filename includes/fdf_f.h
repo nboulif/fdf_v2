@@ -66,7 +66,7 @@ void				render_stat(t_fdf *u);
 
 void				render_map_view_point(t_fdf *u);
 void				render_map_view_cross(t_fdf *u);
-void				render_map_view_default_1(t_fdf *u);
+void				render_map_view_default(t_fdf *u);
 void				render_map_view_colored(t_fdf *u);
 
 void				draw_palette(t_fdf *u, int cur_row);

@@ -64,7 +64,7 @@ $(OBJECTS_DIRECTORY):
 	@echo "$(NAME): $(GREEN)$(OBJECTS_DIRECTORY) was created$(RESET)"
 
 $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
-	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@
+	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@ 
 	@echo "$(GREEN).$(RESET)\c"
 
 $(LIBFT):

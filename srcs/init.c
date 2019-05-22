@@ -15,6 +15,7 @@
 int				init_imgs(t_fdf *u)
 {
 	if (!(u->m_img = (t_image*)malloc(sizeof(t_image))) ||
+		!(u->s_img = (t_image*)malloc(sizeof(t_image))) ||
 		!(u->p_img = (t_image*)malloc(sizeof(t_image))))
 		return (0);
 	u->m_img->nb_row = MAP_SIZE;
@@ -22,6 +23,11 @@ int				init_imgs(t_fdf *u)
 	u->m_img->row0 = 0;
 	u->m_img->col0 = 0;
 	new_image(u->mlx_ptr, u->m_img);
+	u->s_img->nb_row = MAP_SIZE;
+	u->s_img->nb_col = STAT_SIZE;
+	u->s_img->row0 = 0;
+	u->s_img->col0 = MAP_SIZE;
+    new_image(u->mlx_ptr, u->s_img);
 	u->p_img->nb_row = PALETTE_SIZE - 4;
 	u->p_img->nb_col = STAT_SIZE - 4;
 	u->p_img->row0 = MAP_SIZE - PALETTE_SIZE - 2;

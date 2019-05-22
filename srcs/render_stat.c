@@ -116,6 +116,6 @@ void			draw_countour_stat(t_fdf *u)
 	rect.w = STAT_SIZE - 1;
 	rect.h = MAP_SIZE - 1;
 	rect.color = WHITE;
-	fill_rect_in_win(u);
+	mlx_put_image_to_window(u->mlx_ptr, u->win_ptr, u->s_img->ptr, MAP_SIZE, 0);
 	draw_rect_in_win(u, &rect);
 }

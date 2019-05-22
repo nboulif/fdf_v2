@@ -54,6 +54,7 @@ typedef struct		s_fdf
 
 	t_image			*m_img;
 	t_image			*p_img;
+	t_image			*s_img;
 
 	t_map			*map;
 

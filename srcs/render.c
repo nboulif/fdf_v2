@@ -63,8 +63,8 @@ void			render_stat(t_fdf *u)
 void			render_map(t_fdf *u)
 {
 	clear_image(u->m_img);
-	if (u->m_view == 1)
-		render_map_view_default_1(u);
+	if (u->m_view == 1 || u->m_view == 2 || u->m_view == 6)
+		render_map_view_default(u);
 	else if (u->m_view == 3)
 		render_map_view_cross(u);
 	else if (u->m_view == 4)

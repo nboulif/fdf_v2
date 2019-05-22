@@ -52,9 +52,9 @@ void			draw_choice_m_view_2(t_fdf *u, int cur_row, int cur_col)
 	mlx_string_put(u->mlx_ptr, u->win_ptr, cur_col,
 		cur_row + 90, (u->m_view == 5 ? BLACK : WHITE), "Colored");
 	cur_col = MAP_SIZE + (STAT_SIZE / 2) + ((STAT_SIZE / 4) -
-		((ft_strlen("Black") * 10) / 2));
+		((ft_strlen("Isometric") * 10) / 2));
 	mlx_string_put(u->mlx_ptr, u->win_ptr, cur_col,
-		cur_row + 90, (u->m_view == 6 ? BLACK : WHITE), "Black");
+		cur_row + 90, (u->m_view == 6 ? BLACK : WHITE), "Isometric");
 	draw_line_sep_in_stat(u, cur_row + 120, WHITE);
 }
 
@@ -72,11 +72,11 @@ void			draw_choice_m_view_1(t_fdf *u, int cur_row)
 	cur_col = MAP_SIZE + ((STAT_SIZE / 4) -
 		((ft_strlen("Default 1") * 10) / 2));
 	mlx_string_put(u->mlx_ptr, u->win_ptr, cur_col, cur_row + 10,
-		(u->m_view == 1 ? BLACK : WHITE), "Default 1");
+		(u->m_view == 1 ? BLACK : WHITE), "Default");
 	cur_col = MAP_SIZE + (STAT_SIZE / 2) + ((STAT_SIZE / 4) -
 		((ft_strlen("Default 2") * 10) / 2));
 	mlx_string_put(u->mlx_ptr, u->win_ptr, cur_col, cur_row + 10,
-		(u->m_view == 2 ? BLACK : WHITE), "Default 2");
+		(u->m_view == 2 ? BLACK : WHITE), "Parallel");
 	draw_line_sep_in_stat(u, cur_row + 40, WHITE);
 	draw_mid_sep_in_stat(u, cur_row + 40, WHITE, 40);
 	draw_choice_m_view_2(u, cur_row, cur_col);
